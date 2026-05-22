@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 // ============================================================================
@@ -268,6 +269,57 @@ export default function Home() {
           overflow: hidden;
         }
 
+        .gl-portrait {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          overflow: hidden;
+          z-index: 1;
+        }
+        .gl-portrait-img {
+          object-fit: cover;
+          object-position: center 22%;
+          opacity: 0.42;
+          filter: saturate(0.9) contrast(1.02);
+          -webkit-mask-image: radial-gradient(
+            ellipse 72% 58% at 50% 32%,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(0, 0, 0, 0.55) 42%,
+            transparent 72%
+          );
+          mask-image: radial-gradient(
+            ellipse 72% 58% at 50% 32%,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(0, 0, 0, 0.55) 42%,
+            transparent 72%
+          );
+        }
+        .gl-portrait-fade {
+          position: absolute;
+          inset: 0;
+          background:
+            linear-gradient(
+              to bottom,
+              rgba(5, 5, 5, 0.15) 0%,
+              rgba(5, 5, 5, 0.55) 38%,
+              #050505 62%,
+              #050505 100%
+            ),
+            linear-gradient(
+              to right,
+              #050505 0%,
+              transparent 14%,
+              transparent 86%,
+              #050505 100%
+            ),
+            radial-gradient(
+              ellipse 90% 55% at 50% 28%,
+              transparent 0%,
+              rgba(5, 5, 5, 0.35) 50%,
+              #050505 78%
+            );
+        }
+
         .gl-storm {
           position: absolute;
           inset: 0;
@@ -427,14 +479,15 @@ export default function Home() {
 
         .gl-photo-frame {
           position: relative;
-          width: 168px;
-          height: 168px;
+          width: 200px;
+          height: 200px;
           margin-bottom: 40px;
+          filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.55));
         }
         .gl-photo-frame::before {
           content: "";
           position: absolute;
-          inset: 0;
+          inset: -8px;
           border-radius: 50%;
           background: conic-gradient(
             from 0deg,
@@ -444,30 +497,37 @@ export default function Home() {
             #2a3fbb 270deg,
             #4fb3f2 360deg
           );
-          opacity: 0.6;
-          filter: blur(1px);
+          opacity: 0.45;
+          filter: blur(6px);
         }
         .gl-photo {
           position: relative;
-          width: 158px;
-          height: 158px;
-          margin: 5px;
+          width: 188px;
+          height: 188px;
+          margin: 6px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #0a0a0a 0%, #050505 100%);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: rgba(214, 211, 209, 0.4);
-          font-size: 11px;
           overflow: hidden;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
+          background: #050505;
+          isolation: isolate;
+          box-shadow:
+            inset 0 0 40px rgba(5, 5, 5, 0.85),
+            0 0 60px rgba(5, 5, 5, 0.9);
         }
         .gl-photo img {
-          width: 100%;
-          height: 100%;
           object-fit: cover;
-          border-radius: 50%;
+          object-position: center 18%;
+          -webkit-mask-image: radial-gradient(
+            circle at 50% 45%,
+            #000 52%,
+            rgba(0, 0, 0, 0.75) 68%,
+            transparent 88%
+          );
+          mask-image: radial-gradient(
+            circle at 50% 45%,
+            #000 52%,
+            rgba(0, 0, 0, 0.75) 68%,
+            transparent 88%
+          );
         }
 
         .gl-cta {
@@ -831,6 +891,18 @@ export default function Home() {
       `}</style>
 
       <main className="gl-root">
+        <div className="gl-portrait" aria-hidden>
+          <Image
+            src="/grant.png"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="gl-portrait-img"
+          />
+          <div className="gl-portrait-fade" />
+        </div>
+
         <Storm />
 
         <div className="gl-content">
@@ -863,7 +935,13 @@ export default function Home() {
 
           <div className="gl-photo-frame">
             <div className="gl-photo">
-              <span>your photo</span>
+              <Image
+                src="/grant.png"
+                alt="Grant Lannin"
+                fill
+                sizes="200px"
+                className="gl-photo-img"
+              />
             </div>
           </div>
 
