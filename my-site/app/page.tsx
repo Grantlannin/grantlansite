@@ -224,12 +224,12 @@ export default function Home() {
   return (
     <>
       <style jsx global>{`
-        @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&display=swap");
         @import url("https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.17.0/dist/tabler-icons.min.css");
 
         :root {
-          --gl-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
-            serif;
+          --gl-display: var(--font-cinzel), "Cinzel", Georgia, serif;
+          --gl-serif: var(--font-playfair), "Playfair Display", "Iowan Old Style",
+            Palatino, Georgia, serif;
           --gl-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
             Helvetica, Arial, sans-serif;
         }
@@ -317,7 +317,7 @@ export default function Home() {
           left: 0;
           right: 0;
           top: 0;
-          font-family: "Cinzel", serif;
+          font-family: var(--gl-display);
           font-size: 54px;
           font-weight: 700;
           letter-spacing: 0.06em;
@@ -337,40 +337,19 @@ export default function Home() {
         .gl-headline {
           position: relative;
           z-index: 1;
-          font-family: "Cinzel", serif;
+          font-family: var(--gl-display);
           font-size: 54px;
           font-weight: 700;
           letter-spacing: 0.06em;
           text-align: center;
           line-height: 1;
           margin: 0;
-          background: linear-gradient(
-            100deg,
-            #1a1a1a 0%,
-            #1a1a1a 42%,
-            #4fb3f2 45%,
-            #e94e3c 48%,
-            #c84b7d 51%,
-            #2a3fbb 54%,
-            #1a1a1a 57%,
-            #1a1a1a 100%
-          );
-          background-size: 360% 100%;
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-          animation: gl-charge 6s linear infinite;
+          color: #d6d3d1;
+          -webkit-text-fill-color: #d6d3d1;
+          text-shadow: 0 0 24px rgba(214, 211, 209, 0.15);
         }
         .gl-headline .dot {
           color: inherit;
-        }
-        @keyframes gl-charge {
-          0% {
-            background-position: 200% 50%;
-          }
-          100% {
-            background-position: -50% 50%;
-          }
         }
 
         .gl-stripes {
@@ -410,8 +389,9 @@ export default function Home() {
         .gl-tagline {
           font-family: var(--gl-serif);
           font-style: italic;
+          font-weight: 400;
           font-size: 16px;
-          color: rgba(214, 211, 209, 0.62);
+          color: rgba(245, 245, 244, 0.92);
           margin: 0 0 14px 0;
           letter-spacing: 0.01em;
           line-height: 1.55;
@@ -419,8 +399,9 @@ export default function Home() {
         .gl-subtext {
           font-family: var(--gl-serif);
           font-style: italic;
+          font-weight: 400;
           font-size: 13px;
-          color: rgba(170, 175, 180, 0.42);
+          color: rgba(170, 175, 180, 0.48);
           margin: 0;
           letter-spacing: 0.01em;
           line-height: 1.65;
