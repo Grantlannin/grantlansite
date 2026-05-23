@@ -18,15 +18,5 @@ export default function IdentityMiniCourseLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <motionless className={spaceGrotesk.variable}>{children}</motionless>;
-}
-
-function motionless({
-  className,
-  children,
-}: {
-  className?: string;
-  children: React.ReactNode;
-}) {
-  return <div className={className}>{children}</div>;
+  return <div className={spaceGrotesk.variable}>{children}</div>;
 }
