@@ -135,7 +135,9 @@ export function NewsletterSignup() {
       `}</style>
 
       <section className="gl-newsletter">
-        <h2 className="gl-newsletter-title">Subscribe to my newsletter</h2>
+        <h2 className="gl-newsletter-title">
+          Get weekly emails (best on the internet)
+        </h2>
         <p className="gl-newsletter-desc">
           A personal email that will help you become stronger, raise your
           emotional intelligence / self-awareness, design your dream life
