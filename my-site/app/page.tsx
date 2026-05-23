@@ -856,15 +856,8 @@ export default function Home() {
 
           <div className="gl-tagline-block">
             <p className="gl-tagline">
-              Two paths. One is you becoming aware of who you are, accepting
-              your human &ldquo;shape&rdquo; &amp; then amplifying yourself. The
-              other is what you build.
-            </p>
-            <p className="gl-subtext">
-              These two together form the foundations of a process called life
-              design — which is when you consciously begin designing a life you
-              love. My goal with this project is to give you the tools you need
-              to make your life more beautiful.
+              There are two paths — internal &amp; external. One is you becoming
+              who you are, the other is what you&apos;re building to get there.
             </p>
           </div>
 
@@ -887,10 +880,9 @@ export default function Home() {
                 className={`gl-btn ${currentCat === "self" ? "active" : currentCat === "biz" ? "dim" : ""}`}
                 onClick={() => selectCategory("self")}
               >
-                <p className="gl-btn-title">Life Design / EQ</p>
+                <p className="gl-btn-title">Internal</p>
                 <p className="gl-btn-sub">
-                  Become aware of, accept &amp; amplify yourself while designing
-                  a life you love.
+                  Become who you are — awareness, acceptance, amplification.
                 </p>
               </button>
               <button
@@ -898,8 +890,10 @@ export default function Home() {
                 className={`gl-btn ${currentCat === "biz" ? "active" : currentCat === "self" ? "dim" : ""}`}
                 onClick={() => selectCategory("biz")}
               >
-                <p className="gl-btn-title">Business</p>
-                <p className="gl-btn-sub">Build what gives you freedom.</p>
+                <p className="gl-btn-title">External</p>
+                <p className="gl-btn-sub">
+                  Build what you&apos;re creating to get there.
+                </p>
               </button>
             </div>
 
@@ -973,8 +967,8 @@ export default function Home() {
               <i className="ti ti-hand-finger gl-finger" aria-hidden="true" />
             </div>
             <div className="gl-question">
-              <p className="gl-q-main">what are we designing today?</p>
-              <p className="gl-q-sub">Your way forward, or your business?</p>
+              <p className="gl-q-main">which path today?</p>
+              <p className="gl-q-sub">Internal, or external?</p>
             </div>
           </div>
         </div>
