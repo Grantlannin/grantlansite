@@ -132,6 +132,15 @@ export function NewsletterSignup() {
         .gl-newsletter-success {
           color: rgba(180, 195, 210, 0.75);
         }
+        .gl-newsletter-testimonial {
+          font-family: var(--font-space-grotesk), "Space Grotesk", sans-serif;
+          font-size: 11px;
+          font-weight: 400;
+          line-height: 1.55;
+          color: rgba(214, 211, 209, 0.38);
+          margin: 16px 0 0;
+          text-align: center;
+        }
       `}</style>
 
       <section className="gl-newsletter">
@@ -139,12 +148,9 @@ export function NewsletterSignup() {
           Get the world&apos;s best weekly emails sent directly to your inbox
         </h2>
         <p className="gl-newsletter-desc">
-          &ldquo;these emails were so good that i no longer read bedtime stories
-          to my illegitimate son, Herald, at night. I now only read these emails.
-          And guess what? He&apos;s now only 3 &amp; fully proficient at
-          multi-variable calculus &amp; can levitate small animals under 3lbs,
-          just like you laid out! Thanks Grant!&rdquo; &mdash; Real Mark
-          (definitely a real person)
+          A personal email that will help you become stronger, raise your
+          emotional intelligence / self-awareness, design your dream life
+          better, or make more money online.
         </p>
         {status === "success" ? (
           <p className="gl-newsletter-msg gl-newsletter-success">
@@ -175,6 +181,14 @@ export function NewsletterSignup() {
         {error ? (
           <p className="gl-newsletter-msg gl-newsletter-error">{error}</p>
         ) : null}
+        <p className="gl-newsletter-testimonial">
+          &ldquo;Wow. These emails are so good that i no longer read bedtime
+          stories to my illegitimate son, Herald, at night. I only read these.
+          Herald is now only 3 years old, fully proficient at multi-variable
+          calculus, and is close to being able to levitate small animals (under
+          3lbs), with his mind. Thanks Grant!&rdquo; &mdash; Real Mark
+          (definitely a real person)
+        </p>
       </section>
     </>
   );
