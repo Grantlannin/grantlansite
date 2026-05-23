@@ -101,19 +101,18 @@ export function IdentityMiniCourseClient({ initialUnlocked }: Props) {
         }
 
         .course-title {
-          font-family: var(--font-course-display), "Bebas Neue", sans-serif;
-          font-size: clamp(36px, 7vw, 56px);
-          font-weight: 400;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          margin: 0 0 14px;
+          font-family: var(--font-course), "Space Grotesk", sans-serif;
+          font-size: clamp(28px, 5vw, 38px);
+          font-weight: 700;
+          letter-spacing: -0.02em;
+          margin: 0 0 12px;
           text-align: center;
-          line-height: 1.05;
+          line-height: 1.15;
           color: #f5f5f4;
         }
 
         .course-desc {
-          font-family: var(--font-course-body), "Inter", sans-serif;
+          font-family: var(--font-course), "Space Grotesk", sans-serif;
           font-style: normal;
           font-weight: 400;
           font-size: 15px;
@@ -121,7 +120,7 @@ export function IdentityMiniCourseClient({ initialUnlocked }: Props) {
           color: rgba(214, 211, 209, 0.55);
           margin: 0 0 40px;
           line-height: 1.65;
-          letter-spacing: 0.01em;
+          letter-spacing: 0;
           max-width: 520px;
           margin-left: auto;
           margin-right: auto;

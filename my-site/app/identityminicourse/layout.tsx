@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Inter } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import { IDENTITY_MINICOURSE } from "@/lib/courses/identity-minicourse";
 
-const bebas = Bebas_Neue({
-  weight: "400",
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-course-display",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-course-body",
+  weight: ["400", "700"],
+  variable: "--font-course",
 });
 
 export const metadata: Metadata = {
@@ -23,7 +18,15 @@ export default function IdentityMiniCourseLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className={`${bebas.variable} ${inter.variable}`}>{children}</div>
-  );
+  return <motionless className={spaceGrotesk.variable}>{children}</motionless>;
+}
+
+function motionless({
+  className,
+  children,
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return <div className={className}>{children}</div>;
 }
