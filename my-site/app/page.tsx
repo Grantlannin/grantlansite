@@ -921,19 +921,16 @@ export default function Home() {
                 className={`gl-btn ${currentCat === "self" ? "active" : currentCat === "biz" ? "dim" : ""}`}
                 onClick={() => selectCategory("self")}
               >
-                <p className="gl-btn-title">Life Design / EQ</p>
-                <p className="gl-btn-sub">
-                  Become aware of, accept &amp; amplify yourself while designing
-                  a life you love.
-                </p>
+                <p className="gl-btn-title">Life design / Personal development</p>
               </button>
               <button
                 type="button"
                 className={`gl-btn ${currentCat === "biz" ? "active" : currentCat === "self" ? "dim" : ""}`}
                 onClick={() => selectCategory("biz")}
               >
-                <p className="gl-btn-title">Business</p>
-                <p className="gl-btn-sub">Build what gives you freedom.</p>
+                <p className="gl-btn-title">
+                  Business / building your online income
+                </p>
               </button>
             </div>
 
