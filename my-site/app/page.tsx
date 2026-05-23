@@ -426,9 +426,12 @@ export default function Home() {
           font-weight: 400;
           font-size: 13px;
           color: rgba(170, 175, 180, 0.42);
-          margin: 0;
+          margin: 0 0 12px 0;
           letter-spacing: 0.01em;
           line-height: 1.65;
+        }
+        .gl-subtext:last-child {
+          margin-bottom: 0;
         }
         .gl-life-design {
           font-weight: 600;
@@ -455,14 +458,10 @@ export default function Home() {
           -webkit-text-fill-color: transparent;
           animation: gl-charge 6s linear infinite;
         }
-        .gl-love {
-          color: rgba(245, 245, 244, 0.92);
+        .gl-design-emphasis {
           text-decoration: underline;
-          text-decoration-color: rgba(200, 75, 125, 0.85);
+          text-decoration-color: rgba(214, 211, 209, 0.45);
           text-underline-offset: 3px;
-          text-shadow:
-            0 0 10px rgba(200, 75, 125, 0.55),
-            0 0 22px rgba(79, 179, 242, 0.35);
         }
 
         .gl-photo-frame {
@@ -896,9 +895,19 @@ export default function Home() {
             <p className="gl-subtext">
               These two together form the foundations of a process called{" "}
               <span className="gl-life-design">life design</span> — which is
-              when you consciously begin designing a life you{" "}
-              <span className="gl-love">love</span>. My goal with this project is
-              to give you the tools you need to make your life more beautiful.
+              the art of{" "}
+              <span className="gl-design-emphasis">
+                consciously designing a life you absolutely love
+              </span>
+              .
+            </p>
+            <p className="gl-subtext">
+              Many people don&apos;t realize they can build their life to look
+              exactly how they want it to, they just need the skills to do it.
+            </p>
+            <p className="gl-subtext">
+              My goal with this project is to give you the tools you need to
+              make your life more beautiful.
             </p>
           </div>
 
