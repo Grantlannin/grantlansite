@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 
+import { FREE_COURSES } from "@/lib/courses/free-courses";
+
 // ============================================================================
 // TYPES
 // ============================================================================
@@ -22,22 +24,13 @@ type Drop = readonly [x1: number, y2: number, opacity: number, dur: number, dela
 // `href` overrides the default `/<slug>` link if set.
 // ============================================================================
 const COURSES: Record<"self" | "biz", Course[]> = {
-  self: [
-    {
-      title: "Identity Mini Course",
-      price: "Free",
-      type: "free",
-      slug: "identityminicourse",
-      href: "/identityminicourse",
-    },
-    {
-      title: "Confidence Course",
-      price: "Free",
-      type: "free",
-      slug: "confidence",
-      href: "https://psychoticselfconfidence.com",
-    },
-  ],
+  self: FREE_COURSES.map((course) => ({
+    title: course.title,
+    price: "Free",
+    type: "free" as const,
+    slug: course.slug,
+    href: course.href,
+  })),
   biz: [],
 };
 

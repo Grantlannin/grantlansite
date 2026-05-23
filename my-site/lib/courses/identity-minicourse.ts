@@ -16,7 +16,7 @@ export const IDENTITY_MINICOURSE = {
   lessons: [
     {
       number: 1,
-      title: "Identity videos",
+      title: "seeing reality with new eyes",
       video: { provider: "loom", id: "821a059989bb46c5a8ba3f3867ec1319" },
     },
     {
