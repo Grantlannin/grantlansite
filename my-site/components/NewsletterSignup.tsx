@@ -139,11 +139,12 @@ export function NewsletterSignup() {
           Get the world&apos;s best weekly emails sent directly to your inbox
         </h2>
         <p className="gl-newsletter-desc">
-          &ldquo;these emails were so good that I&apos;ve fully swapped bedtime
-          stories for reading these emails to my illegitimate son Herald at
-          bedtime. He&apos;s now proficient at multi-variable calculus &amp; can
-          levitate small animals under 3lbs just like you laid out. Thanks
-          Grant!&rdquo; &mdash; Real Mark (definitely a real person)
+          &ldquo;these emails were so good that i no longer read bedtime stories
+          to my illegitimate son, Herald, at night. I now only read these emails.
+          And guess what? He&apos;s now only 3 &amp; fully proficient at
+          multi-variable calculus &amp; can levitate small animals under 3lbs,
+          just like you laid out! Thanks Grant!&rdquo; &mdash; Real Mark
+          (definitely a real person)
         </p>
         {status === "success" ? (
           <p className="gl-newsletter-msg gl-newsletter-success">

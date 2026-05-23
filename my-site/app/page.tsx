@@ -515,6 +515,17 @@ export default function Home() {
           object-position: center;
         }
 
+        .gl-resources-section {
+          width: 100%;
+          max-width: 620px;
+          margin: 48px 0 28px;
+          text-align: center;
+        }
+        .gl-resources-title {
+          font-size: 42px;
+          letter-spacing: 0.07em;
+        }
+
         .gl-cta {
           width: 100%;
           max-width: 620px;
@@ -857,6 +868,9 @@ export default function Home() {
           .gl-headline-wrap::after {
             font-size: 36px;
           }
+          .gl-resources-title {
+            font-size: 28px;
+          }
           .gl-buttons {
             grid-template-columns: 1fr;
           }
@@ -921,6 +935,10 @@ export default function Home() {
           </div>
 
           <NewsletterSignup />
+
+          <div className="gl-resources-section">
+            <h2 className="gl-headline gl-resources-title">DIGITAL RESOURCES</h2>
+          </div>
 
           <div className="gl-cta">
             <div className="gl-buttons">
