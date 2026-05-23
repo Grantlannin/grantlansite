@@ -927,6 +927,10 @@ export default function Home() {
                 onClick={() => selectCategory("self")}
               >
                 <p className="gl-btn-title">Life design / Personal development</p>
+                <p className="gl-btn-sub">
+                  Become aware of, accept &amp; amplify yourself while designing
+                  a life you love.
+                </p>
               </button>
               <button
                 type="button"
@@ -936,6 +940,7 @@ export default function Home() {
                 <p className="gl-btn-title">
                   Business / building your online income
                 </p>
+                <p className="gl-btn-sub">Build what gives you freedom.</p>
               </button>
             </div>
 
