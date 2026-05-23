@@ -12,7 +12,7 @@ export const FREE_COURSES: FreeCourse[] = [
     description:
       "Five lessons on identity, results, and becoming who you choose to be.",
     slug: "identityminicourse",
-    href: "/identityminicourse",
+    href: "/identityminicourse/join",
   },
   {
     title: "Confidence Course",
