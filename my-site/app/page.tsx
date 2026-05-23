@@ -332,7 +332,7 @@ export default function Home() {
         .gl-stripes {
           display: flex;
           gap: 4px;
-          margin-bottom: 28px;
+          margin-bottom: 24px;
         }
         .gl-stripes span {
           width: 28px;
@@ -776,6 +776,18 @@ export default function Home() {
             <span />
           </div>
 
+          <div className="gl-photo-frame">
+            <div className="gl-photo">
+              <Image
+                src="/grant.png"
+                alt="Grant Lannin"
+                fill
+                sizes="(max-width: 620px) 100vw, 620px"
+                className="gl-photo-img"
+              />
+            </div>
+          </div>
+
           <div className="gl-tagline-block">
             <p className="gl-tagline">
               There are two paths. One is who you become, the other is what you
@@ -793,18 +805,6 @@ export default function Home() {
               My goal with this project is to give you the tools you need to
               make your life more beautiful.
             </p>
-          </div>
-
-          <div className="gl-photo-frame">
-            <div className="gl-photo">
-              <Image
-                src="/grant.png"
-                alt="Grant Lannin"
-                fill
-                sizes="(max-width: 620px) 100vw, 620px"
-                className="gl-photo-img"
-              />
-            </div>
           </div>
 
           <NewsletterSignup />
