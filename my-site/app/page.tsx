@@ -8,11 +8,10 @@ import { NewsletterSignup } from "@/components/NewsletterSignup";
 // TYPES
 // ============================================================================
 type Category = "self" | "biz" | null;
-type CourseType = "free" | "paid" | null;
 type Course = {
   title: string;
-  price: string;
-  type: "free" | "paid";
+  price?: string;
+  type?: "free" | "paid";
   slug: string;
   href?: string;
 };
@@ -22,58 +21,22 @@ type Drop = readonly [x1: number, y2: number, opacity: number, dur: number, dela
 // COURSE DATA — edit titles, prices, and `href` to point at your real URLs.
 // `href` overrides the default `/<slug>` link if set.
 // ============================================================================
-const COURSES: Record<"self" | "biz", { free: Course[]; paid: Course[] }> = {
-  self: {
-    free: [
-      {
-        title: "Identity Mini Course",
-        price: "Free",
-        type: "free",
-        slug: "identityminicourse",
-        href: "/identityminicourse",
-      },
-      { title: "Free Intro", price: "Free", type: "free", slug: "free-intro" },
-    ],
-    paid: [
-      {
-        title: "Psychology of Disrespect",
-        price: "$9",
-        type: "paid",
-        slug: "disrespect",
-      },
-      {
-        title: "Psychology of the Super-Charismatic",
-        price: "$9",
-        type: "paid",
-        slug: "charisma",
-      },
-      { title: "ADHD Productivity", price: "$19", type: "paid", slug: "adhd" },
-    ],
-  },
-  biz: {
-    free: [
-      {
-        title: "Free Business Starter",
-        price: "Free",
-        type: "free",
-        slug: "free-business",
-      },
-    ],
-    paid: [
-      {
-        title: "High-Ticket Offer Masterclass",
-        price: "$27",
-        type: "paid",
-        slug: "hto",
-      },
-      {
-        title: "Genius Offer System",
-        price: "TBD",
-        type: "paid",
-        slug: "gos",
-      },
-    ],
-  },
+const COURSES: Record<"self" | "biz", Course[]> = {
+  self: [
+    {
+      title: "Identity Mini Course",
+      price: "Free",
+      type: "free",
+      slug: "identityminicourse",
+      href: "/identityminicourse",
+    },
+    {
+      title: "Confidence Course",
+      slug: "confidence",
+      href: "https://psychoticselfconfidence.com",
+    },
+  ],
+  biz: [],
 };
 
 // ============================================================================
@@ -209,25 +172,17 @@ function Storm() {
 
 export default function Home() {
   const [currentCat, setCurrentCat] = useState<Category>(null);
-  const [selectedType, setSelectedType] = useState<CourseType>(null);
 
   const selectCategory = (cat: "self" | "biz") => {
     if (currentCat === cat) {
       setCurrentCat(null);
-      setSelectedType(null);
       return;
     }
     setCurrentCat(cat);
-    setSelectedType(null);
   };
-  const closePanel = () => {
-    setCurrentCat(null);
-    setSelectedType(null);
-  };
-  const goBack = () => setSelectedType(null);
+  const closePanel = () => setCurrentCat(null);
 
-  const courses =
-    currentCat && selectedType ? COURSES[currentCat][selectedType] : [];
+  const courses = currentCat ? COURSES[currentCat] : [];
 
   return (
     <>
@@ -664,66 +619,6 @@ export default function Home() {
           color: #f5f5f4;
         }
 
-        .gl-sub-buttons {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 12px;
-        }
-        .gl-sub-btn {
-          position: relative;
-          padding: 22px 18px 20px;
-          background: linear-gradient(180deg, #111111 0%, #080808 100%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 12px;
-          cursor: pointer;
-          overflow: hidden;
-          transition:
-            transform 0.2s,
-            border-color 0.2s,
-            box-shadow 0.2s;
-          text-align: left;
-          font-family: inherit;
-          color: inherit;
-        }
-        .gl-sub-btn:hover {
-          transform: scale(1.02);
-          border-color: rgba(79, 179, 242, 0.4);
-          box-shadow: 0 0 20px -6px rgba(79, 179, 242, 0.35);
-        }
-        .gl-sub-btn::before {
-          content: "";
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 0;
-          height: 4px;
-          background: linear-gradient(
-            90deg,
-            #4fb3f2 0%,
-            #4fb3f2 25%,
-            #e94e3c 25%,
-            #e94e3c 50%,
-            #c84b7d 50%,
-            #c84b7d 75%,
-            #2a3fbb 75%,
-            #2a3fbb 100%
-          );
-        }
-        .gl-sub-btn-title {
-          font-family: var(--gl-serif);
-          font-size: 18px;
-          font-weight: 500;
-          margin: 0 0 3px 0;
-          letter-spacing: -0.01em;
-          color: #f5f5f4;
-        }
-        .gl-sub-btn-sub {
-          font-size: 12px;
-          margin: 0;
-          line-height: 1.5;
-          color: rgba(214, 211, 209, 0.55);
-        }
-
         .gl-view {
           animation: gl-spawn 0.3s ease-out;
         }
@@ -736,20 +631,6 @@ export default function Home() {
             opacity: 1;
             transform: translateY(0);
           }
-        }
-        .gl-back {
-          background: none;
-          border: none;
-          cursor: pointer;
-          color: rgba(180, 195, 210, 0.7);
-          font-size: 12px;
-          padding: 0;
-          margin-bottom: 14px;
-          font-family: inherit;
-          letter-spacing: 0.03em;
-        }
-        .gl-back:hover {
-          color: #f5f5f4;
         }
         .gl-course {
           display: flex;
@@ -874,9 +755,6 @@ export default function Home() {
           .gl-buttons {
             grid-template-columns: 1fr;
           }
-          .gl-sub-buttons {
-            grid-template-columns: 1fr;
-          }
           .gl-tagline {
             font-size: 15px;
           }
@@ -976,56 +854,38 @@ export default function Home() {
                   ×
                 </button>
 
-                {selectedType === null ? (
-                  <div className="gl-view">
-                    <div className="gl-sub-buttons">
-                      <button
-                        type="button"
-                        className="gl-sub-btn"
-                        onClick={() => setSelectedType("free")}
-                      >
-                        <p className="gl-sub-btn-title">Free Courses</p>
-                        <p className="gl-sub-btn-sub">No payment, just value</p>
-                      </button>
-                      <button
-                        type="button"
-                        className="gl-sub-btn"
-                        onClick={() => setSelectedType("paid")}
-                      >
-                        <p className="gl-sub-btn-title">Paid Courses</p>
-                        <p className="gl-sub-btn-sub">Go deeper, faster</p>
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="gl-view">
-                    <button type="button" className="gl-back" onClick={goBack}>
-                      ← Back
-                    </button>
-                    <div>
-                      {courses.length === 0 ? (
-                        <p className="gl-empty">
-                          Nothing here yet — check back soon.
-                        </p>
-                      ) : (
-                        courses.map((c) => (
-                          <a
-                            key={c.slug}
-                            href={c.href ?? `/${c.slug}`}
-                            className="gl-course"
-                          >
-                            <span className="gl-course-title">{c.title}</span>
-                            <span
-                              className={`gl-price gl-price-${c.type}`}
-                            >
+                <div className="gl-view">
+                  {courses.length === 0 ? (
+                    <p className="gl-empty">
+                      Nothing here yet — check back soon.
+                    </p>
+                  ) : (
+                    courses.map((c) => {
+                      const href = c.href ?? `/${c.slug}`;
+                      const isExternal = href.startsWith("http");
+                      return (
+                        <a
+                          key={c.slug}
+                          href={href}
+                          className="gl-course"
+                          {...(isExternal
+                            ? {
+                                target: "_blank",
+                                rel: "noopener noreferrer",
+                              }
+                            : {})}
+                        >
+                          <span className="gl-course-title">{c.title}</span>
+                          {c.price && c.type ? (
+                            <span className={`gl-price gl-price-${c.type}`}>
                               {c.price}
                             </span>
-                          </a>
-                        ))
-                      )}
-                    </div>
-                  </div>
-                )}
+                          ) : null}
+                        </a>
+                      );
+                    })
+                  )}
+                </div>
               </div>
             </div>
           </div>
