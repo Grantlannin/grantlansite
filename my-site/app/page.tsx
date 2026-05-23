@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 // ============================================================================
 // TYPES
@@ -918,6 +919,8 @@ export default function Home() {
               />
             </div>
           </div>
+
+          <NewsletterSignup />
 
           <div className="gl-cta">
             <div className="gl-buttons">
