@@ -183,11 +183,11 @@ export function NewsletterSignup() {
         ) : null}
         <p className="gl-newsletter-testimonial">
           &ldquo;Wow. These emails are so good that i no longer read bedtime
-          stories to my illegitimate son, Herald, at night. I only read these.
-          Herald is now only 3 years old, fully proficient at multi-variable
-          calculus, and is close to being able to levitate small animals (under
-          3lbs), with his mind. Thanks Grant!&rdquo; &mdash; Real Mark
-          (definitely a real person)
+          stories to my illegitimate son - Herald - at night. I only read these
+          emails to him, and nothing else. He is now only 3 years old and is
+          close to being able to levitate small animals (under 3lbs), with his
+          mind. And that was only after 6 emails! Thanks Grant!&rdquo; &mdash;
+          Real Mark (definitely a real person)
         </p>
       </section>
     </>
