@@ -344,12 +344,33 @@ export default function Home() {
           text-align: center;
           line-height: 1;
           margin: 0;
-          color: #d6d3d1;
-          -webkit-text-fill-color: #d6d3d1;
-          text-shadow: 0 0 24px rgba(214, 211, 209, 0.15);
+          background: linear-gradient(
+            100deg,
+            #1a1a1a 0%,
+            #1a1a1a 42%,
+            #4fb3f2 45%,
+            #e94e3c 48%,
+            #c84b7d 51%,
+            #2a3fbb 54%,
+            #1a1a1a 57%,
+            #1a1a1a 100%
+          );
+          background-size: 360% 100%;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: gl-charge 6s linear infinite;
         }
         .gl-headline .dot {
           color: inherit;
+        }
+        @keyframes gl-charge {
+          0% {
+            background-position: 200% 50%;
+          }
+          100% {
+            background-position: -50% 50%;
+          }
         }
 
         .gl-stripes {
@@ -389,9 +410,8 @@ export default function Home() {
         .gl-tagline {
           font-family: var(--gl-serif);
           font-style: italic;
-          font-weight: 400;
           font-size: 16px;
-          color: rgba(245, 245, 244, 0.92);
+          color: rgba(214, 211, 209, 0.62);
           margin: 0 0 14px 0;
           letter-spacing: 0.01em;
           line-height: 1.55;
@@ -399,9 +419,8 @@ export default function Home() {
         .gl-subtext {
           font-family: var(--gl-serif);
           font-style: italic;
-          font-weight: 400;
           font-size: 13px;
-          color: rgba(170, 175, 180, 0.48);
+          color: rgba(170, 175, 180, 0.42);
           margin: 0;
           letter-spacing: 0.01em;
           line-height: 1.65;
