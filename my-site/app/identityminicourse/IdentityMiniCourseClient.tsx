@@ -50,10 +50,9 @@ export function IdentityMiniCourseClient({ initialUnlocked }: Props) {
     <>
       <style jsx global>{`
         :root {
-          --gl-display: var(--font-cinzel), "Cinzel", Georgia, serif;
-          --gl-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
-          --gl-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-            Helvetica, Arial, sans-serif;
+          --gl-display: var(--font-space-grotesk), "Space Grotesk", sans-serif;
+          --gl-serif: var(--font-space-grotesk), "Space Grotesk", sans-serif;
+          --gl-sans: var(--font-space-grotesk), "Space Grotesk", sans-serif;
         }
 
         html,
@@ -101,7 +100,7 @@ export function IdentityMiniCourseClient({ initialUnlocked }: Props) {
         }
 
         .course-title {
-          font-family: var(--font-course), "Space Grotesk", sans-serif;
+          font-family: var(--font-space-grotesk), "Space Grotesk", sans-serif;
           font-size: clamp(28px, 5vw, 38px);
           font-weight: 700;
           letter-spacing: -0.02em;
@@ -112,7 +111,7 @@ export function IdentityMiniCourseClient({ initialUnlocked }: Props) {
         }
 
         .course-desc {
-          font-family: var(--font-course), "Space Grotesk", sans-serif;
+          font-family: var(--font-space-grotesk), "Space Grotesk", sans-serif;
           font-style: normal;
           font-weight: 400;
           font-size: 15px;
@@ -155,8 +154,7 @@ export function IdentityMiniCourseClient({ initialUnlocked }: Props) {
 
         .course-gate h2 {
           font-family: var(--gl-serif);
-          font-style: italic;
-          font-weight: 400;
+          font-weight: 500;
           font-size: 22px;
           margin: 0 0 8px;
           text-align: center;
@@ -261,7 +259,7 @@ export function IdentityMiniCourseClient({ initialUnlocked }: Props) {
 
         .course-lesson-title {
           font-family: var(--gl-serif);
-          font-style: italic;
+          font-weight: 500;
           font-size: clamp(18px, 3.5vw, 22px);
           margin: 0;
           color: rgba(245, 245, 244, 0.92);

@@ -234,11 +234,9 @@ export default function Home() {
         @import url("https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.17.0/dist/tabler-icons.min.css");
 
         :root {
-          --gl-display: var(--font-cinzel), "Cinzel", Georgia, serif;
-          --gl-serif: var(--font-playfair), "Playfair Display", "Iowan Old Style",
-            Palatino, Georgia, serif;
-          --gl-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-            Helvetica, Arial, sans-serif;
+          --gl-display: var(--font-space-grotesk), "Space Grotesk", sans-serif;
+          --gl-serif: var(--font-space-grotesk), "Space Grotesk", sans-serif;
+          --gl-sans: var(--font-space-grotesk), "Space Grotesk", sans-serif;
         }
 
         html,
@@ -416,7 +414,7 @@ export default function Home() {
         }
         .gl-tagline {
           font-family: var(--gl-serif);
-          font-style: italic;
+          font-weight: 400;
           font-size: 16px;
           color: rgba(214, 211, 209, 0.62);
           margin: 0 0 14px 0;
@@ -425,7 +423,7 @@ export default function Home() {
         }
         .gl-subtext {
           font-family: var(--gl-serif);
-          font-style: italic;
+          font-weight: 400;
           font-size: 13px;
           color: rgba(170, 175, 180, 0.42);
           margin: 0;
@@ -539,8 +537,7 @@ export default function Home() {
         .gl-btn-title {
           font-family: var(--gl-serif);
           font-size: 24px;
-          font-weight: 400;
-          font-style: italic;
+          font-weight: 500;
           margin: 0 0 6px 0;
           letter-spacing: -0.02em;
           color: #f5f5f4;
@@ -669,8 +666,7 @@ export default function Home() {
         .gl-sub-btn-title {
           font-family: var(--gl-serif);
           font-size: 18px;
-          font-weight: 400;
-          font-style: italic;
+          font-weight: 500;
           margin: 0 0 3px 0;
           letter-spacing: -0.01em;
           color: #f5f5f4;
@@ -753,7 +749,6 @@ export default function Home() {
           color: rgba(180, 195, 210, 0.5);
           text-align: center;
           padding: 20px;
-          font-style: italic;
           font-family: var(--gl-serif);
           font-size: 14px;
         }
@@ -803,7 +798,7 @@ export default function Home() {
         }
         .gl-q-main {
           font-family: var(--gl-serif);
-          font-style: italic;
+          font-weight: 500;
           font-size: 19px;
           color: rgba(245, 245, 244, 0.88);
           margin: 0 0 5px 0;
@@ -811,7 +806,7 @@ export default function Home() {
         }
         .gl-q-sub {
           font-family: var(--gl-serif);
-          font-style: italic;
+          font-weight: 400;
           font-size: 14px;
           color: rgba(180, 195, 210, 0.5);
           margin: 0;
