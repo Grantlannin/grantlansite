@@ -10,8 +10,10 @@ export type Lesson = {
 
 export const IDENTITY_MINICOURSE = {
   slug: "identityminicourse",
-  title: "Identity Mini Course",
-  description: "Five lessons on identity, results, and becoming who you choose to be.",
+  title: "Your Identity Mini Course",
+  description:
+    "Five lessons on identity and becoming who you choose to be.",
+  optInNote: "(course link will also be emailed to you, so you have it)",
   storageKey: "identity-minicourse-unlocked",
   lessons: [
     {

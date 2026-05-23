@@ -8,9 +8,9 @@ export type FreeCourse = {
 
 export const FREE_COURSES: FreeCourse[] = [
   {
-    title: "Identity Mini Course",
+    title: "Your Identity Mini Course",
     description:
-      "Five lessons on identity, results, and becoming who you choose to be.",
+      "Five lessons on identity and becoming who you choose to be.",
     slug: "identityminicourse",
     href: "/identityminicourse/join",
   },

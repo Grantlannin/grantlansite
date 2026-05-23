@@ -117,9 +117,21 @@ export function IdentityMiniCourseClient({ initialUnlocked }: Props) {
           font-size: 15px;
           text-align: center;
           color: rgba(214, 211, 209, 0.55);
-          margin: 0 0 40px;
+          margin: 0 0 8px;
           line-height: 1.65;
           letter-spacing: 0;
+          max-width: 520px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .course-desc-note {
+          font-family: var(--font-space-grotesk), "Space Grotesk", sans-serif;
+          font-size: 14px;
+          text-align: center;
+          color: rgba(214, 211, 209, 0.45);
+          margin: 0 0 40px;
+          line-height: 1.55;
           max-width: 520px;
           margin-left: auto;
           margin-right: auto;
@@ -297,14 +309,14 @@ export function IdentityMiniCourseClient({ initialUnlocked }: Props) {
 
           <h1 className="course-title">{IDENTITY_MINICOURSE.title}</h1>
           <p className="course-desc">{IDENTITY_MINICOURSE.description}</p>
+          {!unlocked ? (
+            <p className="course-desc-note">{IDENTITY_MINICOURSE.optInNote}</p>
+          ) : null}
 
           {!unlocked ? (
             <section className="course-gate">
               <h2>Enter your email to start</h2>
-              <p>
-                Get instant access to all five lessons. We&apos;ll send updates
-                when new material drops.
-              </p>
+              <p>Enter your email to unlock all five lessons.</p>
               <form className="course-form" onSubmit={handleSubmit}>
                 <input
                   className="course-input"
