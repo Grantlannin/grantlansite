@@ -426,12 +426,9 @@ export default function Home() {
           font-weight: 400;
           font-size: 13px;
           color: rgba(170, 175, 180, 0.42);
-          margin: 0 0 12px 0;
+          margin: 0;
           letter-spacing: 0.01em;
           line-height: 1.65;
-        }
-        .gl-subtext:last-child {
-          margin-bottom: 0;
         }
         .gl-life-design {
           font-weight: 600;
@@ -459,9 +456,13 @@ export default function Home() {
           animation: gl-charge 6s linear infinite;
         }
         .gl-design-emphasis {
+          color: rgba(245, 245, 244, 0.95);
           text-decoration: underline;
-          text-decoration-color: rgba(214, 211, 209, 0.45);
+          text-decoration-color: rgba(245, 245, 244, 0.75);
           text-underline-offset: 3px;
+          text-shadow:
+            0 0 10px rgba(255, 255, 255, 0.55),
+            0 0 22px rgba(255, 255, 255, 0.35);
         }
 
         .gl-photo-frame {
@@ -899,13 +900,8 @@ export default function Home() {
               <span className="gl-design-emphasis">
                 consciously designing a life you absolutely love
               </span>
-              .
-            </p>
-            <p className="gl-subtext">
-              Many people don&apos;t realize they can build their life to look
+              . Many people don&apos;t realize they can build their life to look
               exactly how they want it to, they just need the skills to do it.
-            </p>
-            <p className="gl-subtext">
               My goal with this project is to give you the tools you need to
               make your life more beautiful.
             </p>
