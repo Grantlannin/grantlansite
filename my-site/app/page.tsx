@@ -434,14 +434,20 @@ export default function Home() {
           font-weight: 600;
           background: linear-gradient(
             100deg,
-            #1a1a1a 0%,
-            #1a1a1a 42%,
-            #4fb3f2 45%,
+            #4fb3f2 0%,
+            #c84b7d 14%,
+            #2a3fbb 28%,
+            #e94e3c 38%,
+            #4fb3f2 42%,
+            #f5f5f4 45%,
             #e94e3c 48%,
             #c84b7d 51%,
             #2a3fbb 54%,
-            #1a1a1a 57%,
-            #1a1a1a 100%
+            #f5f5f4 57%,
+            #4fb3f2 62%,
+            #e94e3c 76%,
+            #c84b7d 88%,
+            #2a3fbb 100%
           );
           background-size: 360% 100%;
           -webkit-background-clip: text;
