@@ -915,9 +915,10 @@ export default function Home() {
                 className={`gl-btn ${currentCat === "self" ? "active" : currentCat === "biz" ? "dim" : ""}`}
                 onClick={() => selectCategory("self")}
               >
-                <p className="gl-btn-title">Internal</p>
+                <p className="gl-btn-title">Life Design / EQ</p>
                 <p className="gl-btn-sub">
-                  Become who you are — awareness, acceptance, amplification.
+                  Become aware of, accept &amp; amplify yourself while designing
+                  a life you love.
                 </p>
               </button>
               <button
@@ -925,10 +926,8 @@ export default function Home() {
                 className={`gl-btn ${currentCat === "biz" ? "active" : currentCat === "self" ? "dim" : ""}`}
                 onClick={() => selectCategory("biz")}
               >
-                <p className="gl-btn-title">External</p>
-                <p className="gl-btn-sub">
-                  Build what you&apos;re creating to get there.
-                </p>
+                <p className="gl-btn-title">Business</p>
+                <p className="gl-btn-sub">Build what gives you freedom.</p>
               </button>
             </div>
 
@@ -1002,8 +1001,8 @@ export default function Home() {
               <i className="ti ti-hand-finger gl-finger" aria-hidden="true" />
             </div>
             <div className="gl-question">
-              <p className="gl-q-main">which path today?</p>
-              <p className="gl-q-sub">Internal, or external?</p>
+              <p className="gl-q-main">what are we designing today?</p>
+              <p className="gl-q-sub">Your way forward, or your business?</p>
             </div>
           </div>
         </div>
