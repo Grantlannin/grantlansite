@@ -428,16 +428,28 @@ export default function Home() {
 
         .gl-photo-frame {
           position: relative;
-          width: 200px;
-          height: 200px;
+          width: 100%;
+          max-width: 620px;
           margin-bottom: 40px;
-          filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.55));
+          padding: 3px;
+          border-radius: 18px;
+          background: linear-gradient(
+            135deg,
+            #4fb3f2 0%,
+            #e94e3c 33%,
+            #c84b7d 66%,
+            #2a3fbb 100%
+          );
+          box-shadow:
+            0 0 36px -6px rgba(79, 179, 242, 0.45),
+            0 0 28px -8px rgba(200, 75, 125, 0.35),
+            0 24px 48px rgba(0, 0, 0, 0.5);
         }
         .gl-photo-frame::before {
           content: "";
           position: absolute;
-          inset: -8px;
-          border-radius: 50%;
+          inset: -6px;
+          border-radius: 22px;
           background: conic-gradient(
             from 0deg,
             #4fb3f2 0deg,
@@ -446,37 +458,21 @@ export default function Home() {
             #2a3fbb 270deg,
             #4fb3f2 360deg
           );
-          opacity: 0.45;
-          filter: blur(6px);
+          opacity: 0.35;
+          filter: blur(14px);
+          z-index: -1;
         }
         .gl-photo {
           position: relative;
-          width: 188px;
-          height: 188px;
-          margin: 6px;
-          border-radius: 50%;
+          width: 100%;
+          aspect-ratio: 1024 / 573;
+          border-radius: 15px;
           overflow: hidden;
-          background: #050505;
-          isolation: isolate;
-          box-shadow:
-            inset 0 0 40px rgba(5, 5, 5, 0.85),
-            0 0 60px rgba(5, 5, 5, 0.9);
+          background: #0a0a0a;
         }
         .gl-photo img {
-          object-fit: cover;
-          object-position: center 18%;
-          -webkit-mask-image: radial-gradient(
-            circle at 50% 45%,
-            #000 52%,
-            rgba(0, 0, 0, 0.75) 68%,
-            transparent 88%
-          );
-          mask-image: radial-gradient(
-            circle at 50% 45%,
-            #000 52%,
-            rgba(0, 0, 0, 0.75) 68%,
-            transparent 88%
-          );
+          object-fit: contain;
+          object-position: center;
         }
 
         .gl-cta {
@@ -876,7 +872,7 @@ export default function Home() {
                 src="/grant.png"
                 alt="Grant Lannin"
                 fill
-                sizes="200px"
+                sizes="(max-width: 620px) 100vw, 620px"
                 className="gl-photo-img"
               />
             </div>
