@@ -24,6 +24,13 @@ type Drop = readonly [x1: number, y2: number, opacity: number, dur: number, dela
 const COURSES: Record<"self" | "biz", { free: Course[]; paid: Course[] }> = {
   self: {
     free: [
+      {
+        title: "Identity Mini Course",
+        price: "Free",
+        type: "free",
+        slug: "identityminicourse",
+        href: "/identityminicourse",
+      },
       { title: "Free Intro", price: "Free", type: "free", slug: "free-intro" },
     ],
     paid: [
