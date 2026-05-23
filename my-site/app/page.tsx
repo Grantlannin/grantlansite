@@ -269,57 +269,6 @@ export default function Home() {
           overflow: hidden;
         }
 
-        .gl-portrait {
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          overflow: hidden;
-          z-index: 1;
-        }
-        .gl-portrait-img {
-          object-fit: cover;
-          object-position: center 22%;
-          opacity: 0.42;
-          filter: saturate(0.9) contrast(1.02);
-          -webkit-mask-image: radial-gradient(
-            ellipse 72% 58% at 50% 32%,
-            rgba(0, 0, 0, 0.95) 0%,
-            rgba(0, 0, 0, 0.55) 42%,
-            transparent 72%
-          );
-          mask-image: radial-gradient(
-            ellipse 72% 58% at 50% 32%,
-            rgba(0, 0, 0, 0.95) 0%,
-            rgba(0, 0, 0, 0.55) 42%,
-            transparent 72%
-          );
-        }
-        .gl-portrait-fade {
-          position: absolute;
-          inset: 0;
-          background:
-            linear-gradient(
-              to bottom,
-              rgba(5, 5, 5, 0.15) 0%,
-              rgba(5, 5, 5, 0.55) 38%,
-              #050505 62%,
-              #050505 100%
-            ),
-            linear-gradient(
-              to right,
-              #050505 0%,
-              transparent 14%,
-              transparent 86%,
-              #050505 100%
-            ),
-            radial-gradient(
-              ellipse 90% 55% at 50% 28%,
-              transparent 0%,
-              rgba(5, 5, 5, 0.35) 50%,
-              #050505 78%
-            );
-        }
-
         .gl-storm {
           position: absolute;
           inset: 0;
@@ -891,18 +840,6 @@ export default function Home() {
       `}</style>
 
       <main className="gl-root">
-        <div className="gl-portrait" aria-hidden>
-          <Image
-            src="/grant.png"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="gl-portrait-img"
-          />
-          <div className="gl-portrait-fade" />
-        </div>
-
         <Storm />
 
         <div className="gl-content">
