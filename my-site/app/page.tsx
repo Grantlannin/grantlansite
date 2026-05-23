@@ -430,6 +430,34 @@ export default function Home() {
           letter-spacing: 0.01em;
           line-height: 1.65;
         }
+        .gl-life-design {
+          font-weight: 600;
+          background: linear-gradient(
+            100deg,
+            #1a1a1a 0%,
+            #1a1a1a 42%,
+            #4fb3f2 45%,
+            #e94e3c 48%,
+            #c84b7d 51%,
+            #2a3fbb 54%,
+            #1a1a1a 57%,
+            #1a1a1a 100%
+          );
+          background-size: 360% 100%;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: gl-charge 6s linear infinite;
+        }
+        .gl-love {
+          color: rgba(245, 245, 244, 0.92);
+          text-decoration: underline;
+          text-decoration-color: rgba(200, 75, 125, 0.85);
+          text-underline-offset: 3px;
+          text-shadow:
+            0 0 10px rgba(200, 75, 125, 0.55),
+            0 0 22px rgba(79, 179, 242, 0.35);
+        }
 
         .gl-photo-frame {
           position: relative;
@@ -856,8 +884,15 @@ export default function Home() {
 
           <div className="gl-tagline-block">
             <p className="gl-tagline">
-              There are two paths — internal &amp; external. One is you becoming
-              who you are, the other is what you&apos;re building to get there.
+              There are two paths. One is who you become, the other is what you
+              build.
+            </p>
+            <p className="gl-subtext">
+              These two together form the foundations of a process called{" "}
+              <span className="gl-life-design">life design</span> — which is
+              when you consciously begin designing a life you{" "}
+              <span className="gl-love">love</span>. My goal with this project is
+              to give you the tools you need to make your life more beautiful.
             </p>
           </div>
 
