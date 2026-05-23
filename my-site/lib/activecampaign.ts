@@ -1,23 +1,46 @@
-type ActiveCampaignConfig = {
+type ActiveCampaignBaseConfig = {
   apiUrl: string;
   apiKey: string;
+};
+
+type ActiveCampaignConfig = ActiveCampaignBaseConfig & {
   listId: string;
 };
 
-function getConfig(): ActiveCampaignConfig | null {
+function getBaseConfig(): ActiveCampaignBaseConfig | null {
   const apiUrl = process.env.ACTIVECAMPAIGN_API_URL?.replace(/\/$/, "");
   const apiKey = process.env.ACTIVECAMPAIGN_API_KEY;
-  const listId = process.env.ACTIVECAMPAIGN_LIST_ID;
 
-  if (!apiUrl || !apiKey || !listId) {
+  if (!apiUrl || !apiKey) {
     return null;
   }
 
-  return { apiUrl, apiKey, listId };
+  return { apiUrl, apiKey };
+}
+
+function getMainListId(): string | undefined {
+  return (
+    process.env.ACTIVECAMPAIGN_MAIN_LIST_ID?.trim() ||
+    process.env.ACTIVECAMPAIGN_LIST_ID?.trim() ||
+    undefined
+  );
+}
+
+function getIdentityListId(): string | undefined {
+  return process.env.ACTIVECAMPAIGN_IDENTITY_LIST_ID?.trim() || undefined;
+}
+
+function getConfig(listId: string | undefined): ActiveCampaignConfig | null {
+  const base = getBaseConfig();
+  if (!base || !listId) {
+    return null;
+  }
+
+  return { ...base, listId };
 }
 
 async function acFetch(
-  config: ActiveCampaignConfig,
+  config: ActiveCampaignBaseConfig,
   path: string,
   init?: RequestInit,
 ) {
@@ -43,12 +66,10 @@ async function acFetch(
   return data;
 }
 
-export async function subscribeEmailToList(email: string) {
-  const config = getConfig();
+async function subscribeEmailToListId(email: string, listId: string) {
+  const config = getConfig(listId);
   if (!config) {
-    throw new Error(
-      "ActiveCampaign is not configured. Set ACTIVECAMPAIGN_API_URL, ACTIVECAMPAIGN_API_KEY, and ACTIVECAMPAIGN_LIST_ID.",
-    );
+    throw new Error("ActiveCampaign is not configured.");
   }
 
   const sync = await acFetch(config, "/contact/sync", {
@@ -75,4 +96,26 @@ export async function subscribeEmailToList(email: string) {
   });
 
   return { contactId: String(contactId) };
+}
+
+export async function subscribeToNewsletterList(email: string) {
+  const listId = getMainListId();
+  if (!getBaseConfig() || !listId) {
+    throw new Error(
+      "ActiveCampaign newsletter list is not configured. Set ACTIVECAMPAIGN_API_URL, ACTIVECAMPAIGN_API_KEY, and ACTIVECAMPAIGN_MAIN_LIST_ID (or ACTIVECAMPAIGN_LIST_ID).",
+    );
+  }
+
+  return subscribeEmailToListId(email, listId);
+}
+
+export async function subscribeToIdentityCourseList(email: string) {
+  const listId = getIdentityListId();
+  if (!getBaseConfig() || !listId) {
+    throw new Error(
+      "ActiveCampaign identity course list is not configured. Set ACTIVECAMPAIGN_API_URL, ACTIVECAMPAIGN_API_KEY, and ACTIVECAMPAIGN_IDENTITY_LIST_ID.",
+    );
+  }
+
+  return subscribeEmailToListId(email, listId);
 }

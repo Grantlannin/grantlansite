@@ -32,6 +32,8 @@ const COURSES: Record<"self" | "biz", Course[]> = {
     },
     {
       title: "Confidence Course",
+      price: "Free",
+      type: "free",
       slug: "confidence",
       href: "https://psychoticselfconfidence.com",
     },

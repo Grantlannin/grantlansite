@@ -1,4 +1,4 @@
-import { subscribeEmailToList } from "@/lib/activecampaign";
+import { subscribeToIdentityCourseList } from "@/lib/activecampaign";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    await subscribeEmailToList(email);
+    await subscribeToIdentityCourseList(email);
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Subscription failed.";
