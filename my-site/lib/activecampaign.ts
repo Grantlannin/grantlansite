@@ -30,6 +30,13 @@ function getIdentityListId(): string | undefined {
   return process.env.ACTIVECAMPAIGN_IDENTITY_LIST_ID?.trim() || undefined;
 }
 
+function getWorkWaitlistListId(): string | undefined {
+  return (
+    process.env.ACTIVECAMPAIGN_WORK_WAITLIST_LIST_ID?.trim() ||
+    getMainListId()
+  );
+}
+
 function getConfig(listId: string | undefined): ActiveCampaignConfig | null {
   const base = getBaseConfig();
   if (!base || !listId) {
@@ -114,6 +121,17 @@ export async function subscribeToIdentityCourseList(email: string) {
   if (!getBaseConfig() || !listId) {
     throw new Error(
       "ActiveCampaign identity course list is not configured. Set ACTIVECAMPAIGN_API_URL, ACTIVECAMPAIGN_API_KEY, and ACTIVECAMPAIGN_IDENTITY_LIST_ID.",
+    );
+  }
+
+  return subscribeEmailToListId(email, listId);
+}
+
+export async function subscribeToWorkWaitlistList(email: string) {
+  const listId = getWorkWaitlistListId();
+  if (!getBaseConfig() || !listId) {
+    throw new Error(
+      "ActiveCampaign work waitlist is not configured. Set ACTIVECAMPAIGN_API_URL, ACTIVECAMPAIGN_API_KEY, and ACTIVECAMPAIGN_WORK_WAITLIST_LIST_ID (or ACTIVECAMPAIGN_MAIN_LIST_ID).",
     );
   }
 
