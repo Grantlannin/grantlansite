@@ -46,6 +46,46 @@ function getConfig(listId: string | undefined): ActiveCampaignConfig | null {
   return { ...base, listId };
 }
 
+function getErrorMessage(data: unknown, status: number): string {
+  if (typeof data === "object" && data !== null) {
+    const record = data as Record<string, unknown>;
+    if (typeof record.message === "string" && record.message.trim()) {
+      return record.message;
+    }
+    if (Array.isArray(record.errors)) {
+      const messages = record.errors
+        .map((entry) => {
+          if (typeof entry === "string") return entry;
+          if (typeof entry === "object" && entry !== null) {
+            const error = entry as Record<string, unknown>;
+            if (typeof error.title === "string") return error.title;
+            if (typeof error.detail === "string") return error.detail;
+          }
+          return "";
+        })
+        .filter(Boolean);
+      if (messages.length > 0) {
+        return messages.join(" ");
+      }
+    }
+  }
+
+  return `ActiveCampaign request failed (${status})`;
+}
+
+function isAlreadySubscribedError(message: string): boolean {
+  const normalized = message.toLowerCase();
+  return (
+    normalized.includes("already") ||
+    normalized.includes("duplicate") ||
+    normalized.includes("exists on list")
+  );
+}
+
+function shouldRetryStatus(status: number): boolean {
+  return status === 429 || status === 502 || status === 503 || status === 504;
+}
+
 async function acFetch(
   config: ActiveCampaignBaseConfig,
   path: string,
@@ -63,14 +103,38 @@ async function acFetch(
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    const message =
-      typeof data?.message === "string"
-        ? data.message
-        : `ActiveCampaign request failed (${response.status})`;
-    throw new Error(message);
+    throw new Error(getErrorMessage(data, response.status));
   }
 
   return data;
+}
+
+async function acFetchWithRetry(
+  config: ActiveCampaignBaseConfig,
+  path: string,
+  init?: RequestInit,
+  retries = 2,
+) {
+  let lastError: Error | null = null;
+
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    try {
+      return await acFetch(config, path, init);
+    } catch (error) {
+      lastError = error instanceof Error ? error : new Error("Request failed.");
+      const statusMatch = lastError.message.match(/\((\d{3})\)$/);
+      const status = statusMatch ? Number(statusMatch[1]) : 0;
+
+      if (attempt < retries && shouldRetryStatus(status)) {
+        await new Promise((resolve) => setTimeout(resolve, 400 * (attempt + 1)));
+        continue;
+      }
+
+      throw lastError;
+    }
+  }
+
+  throw lastError ?? new Error("ActiveCampaign request failed.");
 }
 
 async function subscribeEmailToListId(email: string, listId: string) {
@@ -79,10 +143,35 @@ async function subscribeEmailToListId(email: string, listId: string) {
     throw new Error("ActiveCampaign is not configured.");
   }
 
-  const sync = await acFetch(config, "/contact/sync", {
+  const normalizedEmail = email.trim().toLowerCase();
+
+  try {
+    const sync = await acFetchWithRetry(config, "/contact/sync", {
+      method: "POST",
+      body: JSON.stringify({
+        contact: { email: normalizedEmail },
+        contactList: {
+          list: config.listId,
+          status: 1,
+        },
+      }),
+    });
+
+    const contactId = sync?.contact?.id;
+    if (contactId) {
+      return { contactId: String(contactId) };
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "";
+    if (isAlreadySubscribedError(message)) {
+      return { contactId: normalizedEmail };
+    }
+  }
+
+  const sync = await acFetchWithRetry(config, "/contact/sync", {
     method: "POST",
     body: JSON.stringify({
-      contact: { email: email.trim().toLowerCase() },
+      contact: { email: normalizedEmail },
     }),
   });
 
@@ -91,16 +180,23 @@ async function subscribeEmailToListId(email: string, listId: string) {
     throw new Error("ActiveCampaign did not return a contact id.");
   }
 
-  await acFetch(config, "/contactLists", {
-    method: "POST",
-    body: JSON.stringify({
-      contactList: {
-        list: config.listId,
-        contact: contactId,
-        status: 1,
-      },
-    }),
-  });
+  try {
+    await acFetchWithRetry(config, "/contactLists", {
+      method: "POST",
+      body: JSON.stringify({
+        contactList: {
+          list: config.listId,
+          contact: contactId,
+          status: 1,
+        },
+      }),
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "";
+    if (!isAlreadySubscribedError(message)) {
+      throw error;
+    }
+  }
 
   return { contactId: String(contactId) };
 }
