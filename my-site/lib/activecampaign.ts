@@ -31,10 +31,7 @@ function getIdentityListId(): string | undefined {
 }
 
 function getWorkWaitlistListId(): string | undefined {
-  return (
-    process.env.ACTIVECAMPAIGN_WORK_WAITLIST_LIST_ID?.trim() ||
-    getMainListId()
-  );
+  return process.env.ACTIVECAMPAIGN_WORK_WAITLIST_LIST_ID?.trim() || undefined;
 }
 
 function getConfig(listId: string | undefined): ActiveCampaignConfig | null {
@@ -73,7 +70,7 @@ function getErrorMessage(data: unknown, status: number): string {
   return `ActiveCampaign request failed (${status})`;
 }
 
-function isAlreadySubscribedError(message: string): boolean {
+function isDuplicateListError(message: string): boolean {
   const normalized = message.toLowerCase();
   return (
     normalized.includes("already") ||
@@ -137,47 +134,49 @@ async function acFetchWithRetry(
   throw lastError ?? new Error("ActiveCampaign request failed.");
 }
 
-async function subscribeEmailToListId(email: string, listId: string) {
-  const config = getConfig(listId);
-  if (!config) {
-    throw new Error("ActiveCampaign is not configured.");
-  }
+async function findContactListAssociation(
+  config: ActiveCampaignConfig,
+  contactId: string,
+  listId: string,
+) {
+  const data = await acFetchWithRetry(
+    config,
+    `/contacts/${contactId}/contactLists`,
+  );
+  const associations = data?.contactLists ?? [];
 
-  const normalizedEmail = email.trim().toLowerCase();
+  return associations.find(
+    (entry: { list?: string | number; id?: string | number }) =>
+      String(entry.list) === String(listId),
+  );
+}
 
-  try {
-    const sync = await acFetchWithRetry(config, "/contact/sync", {
-      method: "POST",
+async function ensureContactOnList(
+  config: ActiveCampaignConfig,
+  contactId: string,
+) {
+  const existing = await findContactListAssociation(
+    config,
+    contactId,
+    config.listId,
+  );
+
+  if (existing?.id) {
+    if (String(existing.status) === "1") {
+      return;
+    }
+
+    await acFetchWithRetry(config, `/contactLists/${existing.id}`, {
+      method: "PUT",
       body: JSON.stringify({
-        contact: { email: normalizedEmail },
         contactList: {
           list: config.listId,
+          contact: contactId,
           status: 1,
         },
       }),
     });
-
-    const contactId = sync?.contact?.id;
-    if (contactId) {
-      return { contactId: String(contactId) };
-    }
-  } catch (error) {
-    const message = error instanceof Error ? error.message : "";
-    if (isAlreadySubscribedError(message)) {
-      return { contactId: normalizedEmail };
-    }
-  }
-
-  const sync = await acFetchWithRetry(config, "/contact/sync", {
-    method: "POST",
-    body: JSON.stringify({
-      contact: { email: normalizedEmail },
-    }),
-  });
-
-  const contactId = sync?.contact?.id;
-  if (!contactId) {
-    throw new Error("ActiveCampaign did not return a contact id.");
+    return;
   }
 
   try {
@@ -193,10 +192,63 @@ async function subscribeEmailToListId(email: string, listId: string) {
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "";
-    if (!isAlreadySubscribedError(message)) {
+    if (!isDuplicateListError(message)) {
       throw error;
     }
+
+    const refreshed = await findContactListAssociation(
+      config,
+      contactId,
+      config.listId,
+    );
+    if (!refreshed?.id) {
+      throw error;
+    }
+
+    await acFetchWithRetry(config, `/contactLists/${refreshed.id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        contactList: {
+          list: config.listId,
+          contact: contactId,
+          status: 1,
+        },
+      }),
+    });
   }
+
+  const verified = await findContactListAssociation(
+    config,
+    contactId,
+    config.listId,
+  );
+
+  if (!verified?.id) {
+    throw new Error("ActiveCampaign did not add the contact to the list.");
+  }
+}
+
+async function subscribeEmailToListId(email: string, listId: string) {
+  const config = getConfig(listId);
+  if (!config) {
+    throw new Error("ActiveCampaign is not configured.");
+  }
+
+  const normalizedEmail = email.trim().toLowerCase();
+
+  const sync = await acFetchWithRetry(config, "/contact/sync", {
+    method: "POST",
+    body: JSON.stringify({
+      contact: { email: normalizedEmail },
+    }),
+  });
+
+  const contactId = sync?.contact?.id;
+  if (!contactId) {
+    throw new Error("ActiveCampaign did not return a contact id.");
+  }
+
+  await ensureContactOnList(config, String(contactId));
 
   return { contactId: String(contactId) };
 }
@@ -227,7 +279,7 @@ export async function subscribeToWorkWaitlistList(email: string) {
   const listId = getWorkWaitlistListId();
   if (!getBaseConfig() || !listId) {
     throw new Error(
-      "ActiveCampaign work waitlist is not configured. Set ACTIVECAMPAIGN_API_URL, ACTIVECAMPAIGN_API_KEY, and ACTIVECAMPAIGN_WORK_WAITLIST_LIST_ID (or ACTIVECAMPAIGN_MAIN_LIST_ID).",
+      "ActiveCampaign work waitlist is not configured. Set ACTIVECAMPAIGN_API_URL, ACTIVECAMPAIGN_API_KEY, and ACTIVECAMPAIGN_WORK_WAITLIST_LIST_ID.",
     );
   }
 
