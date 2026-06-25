@@ -34,6 +34,10 @@ function getWorkWaitlistListId(): string | undefined {
   return process.env.ACTIVECAMPAIGN_WORK_WAITLIST_LIST_ID?.trim() || undefined;
 }
 
+function getAdhdSystemListId(): string | undefined {
+  return process.env.ACTIVECAMPAIGN_ADHD_SYSTEM_LIST_ID?.trim() || undefined;
+}
+
 function getConfig(listId: string | undefined): ActiveCampaignConfig | null {
   const base = getBaseConfig();
   if (!base || !listId) {
@@ -280,6 +284,17 @@ export async function subscribeToWorkWaitlistList(email: string) {
   if (!getBaseConfig() || !listId) {
     throw new Error(
       "ActiveCampaign work waitlist is not configured. Set ACTIVECAMPAIGN_API_URL, ACTIVECAMPAIGN_API_KEY, and ACTIVECAMPAIGN_WORK_WAITLIST_LIST_ID.",
+    );
+  }
+
+  return subscribeEmailToListId(email, listId);
+}
+
+export async function subscribeToAdhdSystemList(email: string) {
+  const listId = getAdhdSystemListId();
+  if (!getBaseConfig() || !listId) {
+    throw new Error(
+      "ActiveCampaign ADHD guide list is not configured. Set ACTIVECAMPAIGN_API_URL, ACTIVECAMPAIGN_API_KEY, and ACTIVECAMPAIGN_ADHD_SYSTEM_LIST_ID.",
     );
   }
 
