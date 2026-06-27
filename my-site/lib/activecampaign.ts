@@ -38,6 +38,10 @@ function getAdhdSystemListId(): string | undefined {
   return process.env.ACTIVECAMPAIGN_ADHD_SYSTEM_LIST_ID?.trim() || undefined;
 }
 
+function getMakeSalesListId(): string | undefined {
+  return process.env.ACTIVECAMPAIGN_MAKE_SALES_LIST_ID?.trim() || undefined;
+}
+
 function getConfig(listId: string | undefined): ActiveCampaignConfig | null {
   const base = getBaseConfig();
   if (!base || !listId) {
@@ -295,6 +299,17 @@ export async function subscribeToAdhdSystemList(email: string) {
   if (!getBaseConfig() || !listId) {
     throw new Error(
       "ActiveCampaign ADHD guide list is not configured. Set ACTIVECAMPAIGN_API_URL, ACTIVECAMPAIGN_API_KEY, and ACTIVECAMPAIGN_ADHD_SYSTEM_LIST_ID.",
+    );
+  }
+
+  return subscribeEmailToListId(email, listId);
+}
+
+export async function subscribeToMakeSalesList(email: string) {
+  const listId = getMakeSalesListId();
+  if (!getBaseConfig() || !listId) {
+    throw new Error(
+      "ActiveCampaign make sales guide list is not configured. Set ACTIVECAMPAIGN_API_URL, ACTIVECAMPAIGN_API_KEY, and ACTIVECAMPAIGN_MAKE_SALES_LIST_ID.",
     );
   }
 
