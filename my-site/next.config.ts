@@ -1,7 +1,20 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async redirects() {
+    return [
+      {
+        source: "/adhdsystem",
+        destination: "/focus",
+        permanent: true,
+      },
+      {
+        source: "/focussystem",
+        destination: "/focus",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

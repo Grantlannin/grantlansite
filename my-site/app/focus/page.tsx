@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-export default function AdhdSystemPage() {
+export default function FocusSystemPage() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
@@ -15,7 +15,7 @@ export default function AdhdSystemPage() {
     setStatus("loading");
     setError("");
 
-    const response = await fetch("/api/adhd-system", {
+    const response = await fetch("/api/focus", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
@@ -45,7 +45,7 @@ export default function AdhdSystemPage() {
         }
       `}</style>
       <style jsx>{`
-        .adhd-page {
+        .fs-page {
           min-height: 100vh;
           background:
             radial-gradient(
@@ -64,11 +64,11 @@ export default function AdhdSystemPage() {
           flex-direction: column;
           align-items: center;
         }
-        .adhd-inner {
+        .fs-inner {
           width: 100%;
           max-width: 640px;
         }
-        .adhd-back {
+        .fs-back {
           display: inline-block;
           margin-bottom: 32px;
           font-size: 13px;
@@ -76,38 +76,38 @@ export default function AdhdSystemPage() {
           text-decoration: none;
           letter-spacing: 0.02em;
         }
-        .adhd-back:hover {
+        .fs-back:hover {
           color: #f5f5f4;
         }
-        .adhd-stripes {
+        .fs-stripes {
           display: flex;
           gap: 4px;
           margin-bottom: 28px;
           justify-content: center;
         }
-        .adhd-stripes span {
+        .fs-stripes span {
           width: 28px;
           height: 4px;
           border-radius: 2px;
           opacity: 0.85;
         }
-        .adhd-stripes span:nth-child(1) {
+        .fs-stripes span:nth-child(1) {
           background: #4fb3f2;
           box-shadow: 0 0 8px rgba(79, 179, 242, 0.5);
         }
-        .adhd-stripes span:nth-child(2) {
+        .fs-stripes span:nth-child(2) {
           background: #e94e3c;
           box-shadow: 0 0 8px rgba(233, 78, 60, 0.5);
         }
-        .adhd-stripes span:nth-child(3) {
+        .fs-stripes span:nth-child(3) {
           background: #c84b7d;
           box-shadow: 0 0 8px rgba(200, 75, 125, 0.5);
         }
-        .adhd-stripes span:nth-child(4) {
+        .fs-stripes span:nth-child(4) {
           background: #2a3fbb;
           box-shadow: 0 0 8px rgba(42, 63, 187, 0.5);
         }
-        .adhd-kicker {
+        .fs-kicker {
           font-family: var(--font-space-grotesk), "Space Grotesk", sans-serif;
           font-size: 13px;
           font-weight: 700;
@@ -117,7 +117,7 @@ export default function AdhdSystemPage() {
           color: #4fb3f2;
           margin: 0 0 16px;
         }
-        .adhd-title {
+        .fs-title {
           font-family: var(--font-space-grotesk), "Space Grotesk", sans-serif;
           font-size: clamp(26px, 5vw, 36px);
           font-weight: 700;
@@ -127,7 +127,7 @@ export default function AdhdSystemPage() {
           margin: 0 0 16px;
           text-align: center;
         }
-        .adhd-sub {
+        .fs-sub {
           font-family: var(--font-space-grotesk), "Space Grotesk", sans-serif;
           font-size: 15px;
           line-height: 1.6;
@@ -135,7 +135,7 @@ export default function AdhdSystemPage() {
           margin: 0 0 32px;
           text-align: center;
         }
-        .adhd-card {
+        .fs-card {
           padding: 28px 24px;
           border-radius: 16px;
           border: 1px solid rgba(255, 255, 255, 0.1);
@@ -143,7 +143,7 @@ export default function AdhdSystemPage() {
           position: relative;
           overflow: hidden;
         }
-        .adhd-card::before {
+        .fs-card::before {
           content: "";
           position: absolute;
           left: 0;
@@ -158,7 +158,7 @@ export default function AdhdSystemPage() {
             #2a3fbb 100%
           );
         }
-        .adhd-card-label {
+        .fs-card-label {
           font-family: var(--font-space-grotesk), "Space Grotesk", sans-serif;
           font-size: 14px;
           font-weight: 600;
@@ -166,17 +166,17 @@ export default function AdhdSystemPage() {
           margin: 0 0 16px;
           text-align: center;
         }
-        .adhd-form {
+        .fs-form {
           display: flex;
           flex-direction: column;
           gap: 10px;
         }
         @media (min-width: 540px) {
-          .adhd-form {
+          .fs-form {
             flex-direction: row;
           }
         }
-        .adhd-input {
+        .fs-input {
           flex: 1;
           padding: 14px 16px;
           border-radius: 10px;
@@ -186,12 +186,12 @@ export default function AdhdSystemPage() {
           font-size: 15px;
           font-family: inherit;
         }
-        .adhd-input:focus {
+        .fs-input:focus {
           outline: none;
           border-color: rgba(79, 179, 242, 0.5);
           box-shadow: 0 0 0 3px rgba(79, 179, 242, 0.15);
         }
-        .adhd-submit {
+        .fs-submit {
           padding: 14px 22px;
           border: none;
           border-radius: 10px;
@@ -204,56 +204,55 @@ export default function AdhdSystemPage() {
           color: #050505;
           background: linear-gradient(100deg, #4fb3f2, #c84b7d, #2a3fbb);
         }
-        .adhd-submit:disabled {
+        .fs-submit:disabled {
           opacity: 0.6;
           cursor: not-allowed;
         }
-        .adhd-msg {
+        .fs-msg {
           margin: 14px 0 0;
           font-size: 13px;
           text-align: center;
         }
-        .adhd-error {
+        .fs-error {
           color: #f87171;
         }
-        .adhd-success {
+        .fs-success {
           color: rgba(180, 195, 210, 0.75);
         }
       `}</style>
 
-      <main className="adhd-page">
-        <div className="adhd-inner">
-          <Link href="/" className="adhd-back">
+      <main className="fs-page">
+        <div className="fs-inner">
+          <Link href="/" className="fs-back">
             ← Back to GrantLannin.com
           </Link>
 
-          <div className="adhd-stripes" aria-hidden>
+          <div className="fs-stripes" aria-hidden>
             <span />
             <span />
             <span />
             <span />
           </div>
 
-          <p className="adhd-kicker">Free guide</p>
-          <h1 className="adhd-title">
-            How To Tame Your ADHD &amp; Use It To Get Rich (Even if You Think
-            You&apos;re Screwed)
+          <p className="fs-kicker">Free guide</p>
+          <h1 className="fs-title">
+            how to tame your hyper-active mind &amp; use it to get rich
           </h1>
-          <p className="adhd-sub">
+          <p className="fs-sub">
             Enter your email below and I&apos;ll send you the free PDF.
           </p>
 
-          <section className="adhd-card">
+          <section className="fs-card">
             {status === "success" ? (
-              <p className="adhd-msg adhd-success">
+              <p className="fs-msg fs-success">
                 You&apos;re in — check your inbox for the free guide.
               </p>
             ) : (
               <>
-                <p className="adhd-card-label">Get the free PDF</p>
-                <form className="adhd-form" onSubmit={handleSubmit}>
+                <p className="fs-card-label">Get the free PDF</p>
+                <form className="fs-form" onSubmit={handleSubmit}>
                   <input
-                    className="adhd-input"
+                    className="fs-input"
                     type="email"
                     name="email"
                     placeholder="you@example.com"
@@ -264,7 +263,7 @@ export default function AdhdSystemPage() {
                     disabled={status === "loading"}
                   />
                   <button
-                    className="adhd-submit"
+                    className="fs-submit"
                     type="submit"
                     disabled={status === "loading"}
                   >
@@ -272,7 +271,7 @@ export default function AdhdSystemPage() {
                   </button>
                 </form>
                 {error ? (
-                  <p className="adhd-msg adhd-error">{error}</p>
+                  <p className="fs-msg fs-error">{error}</p>
                 ) : null}
               </>
             )}
